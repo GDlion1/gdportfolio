@@ -259,8 +259,8 @@ export default function Hero() {
             <div
               className="float"
               style={{
-                width: "300px",
-                height: "300px",
+                width: "clamp(240px, 75vw, 300px)",
+                height: "clamp(240px, 75vw, 300px)",
                 borderRadius: "50%",
                 background: "var(--accent-gradient)",
                 boxShadow: "0 0 40px var(--primary-glow)",
@@ -274,8 +274,8 @@ export default function Hero() {
                 src="/image.png"
                 alt="Giridharan R"
                 style={{
-                  width: "290px",
-                  height: "290px",
+                  width: "calc(100% - 10px)",
+                  height: "calc(100% - 10px)",
                   borderRadius: "50%",
                   objectFit: "cover",
                   border: "4px solid var(--bg-color)",
@@ -332,7 +332,7 @@ export default function Hero() {
         }
         @media (max-width: 768px) {
           .hero-grid {
-            grid-template_columns: 1fr !important;
+            grid-template-columns: 1fr !important;
             text-align: center !important;
           }
           .hero-grid > div {
