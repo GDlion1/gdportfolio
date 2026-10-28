@@ -1,353 +1,223 @@
-import { useState, useEffect } from "react";
-import { Mail, ArrowRight, Download } from "lucide-react";
-import { Github, Linkedin } from "./Icons";
-import GlitchText from "./GlitchText";
+import { ArrowRight, Download, Terminal } from "lucide-react";
+import { siteConfig } from "../data/siteConfig";
+import DeveloperWorkspace from "./DeveloperWorkspace";
 
 export default function Hero() {
-  const [text, setText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
-
-  const titles = [
-    "Python Full Stack Developer",
-    "Information Science Engineer",
-    "AI Applications Developer"
-  ];
-
-  useEffect(() => {
-    let timer;
-    const handleTyping = () => {
-      const currentIdx = loopNum % titles.length;
-      const fullWord = titles[currentIdx];
-
-      if (!isDeleting) {
-        setText(fullWord.substring(0, text.length + 1));
-        setTypingSpeed(100);
-
-        if (text === fullWord) {
-          setIsDeleting(true);
-          setTypingSpeed(2000); // pause at full word
-        }
-      } else {
-        setText(fullWord.substring(0, text.length - 1));
-        setTypingSpeed(50);
-
-        if (text === "") {
-          setIsDeleting(false);
-          setLoopNum(loopNum + 1);
-          setTypingSpeed(500); // pause before starting next word
-        }
-      }
-    };
-
-    timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed]);
-
-  const handleScrollToProjects = (e) => {
+  const handleScroll = (e, targetId) => {
     e.preventDefault();
-    const element = document.getElementById("projects");
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <section
       id="home"
+      className="bg-yellow-dots"
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingTop: "80px",
+        position: "relative",
+        paddingTop: "3.5rem",
+        paddingBottom: "5rem",
+        borderBottom: "var(--border-thick)",
         overflow: "hidden"
       }}
     >
-      {/* Decorative gradient blobs */}
-      <div
-        className="pulse-bg"
-        style={{
-          position: "absolute",
-          top: "20%",
-          left: "10%",
-          width: "300px",
-          height: "300px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0,0,0,0) 70%)",
-          filter: "blur(40px)",
-          zIndex: 0,
-          pointerEvents: "none"
-        }}
-      />
-      <div
-        className="pulse-bg"
-        style={{
-          position: "absolute",
-          bottom: "10%",
-          right: "10%",
-          width: "400px",
-          height: "400px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(0,0,0,0) 70%)",
-          filter: "blur(50px)",
-          zIndex: 0,
-          pointerEvents: "none",
-          animationDelay: "4s"
-        }}
-      />
-
-      <div className="container" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container">
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1.2fr 0.8fr",
+            gridTemplateColumns: "1fr",
             gap: "3rem",
             alignItems: "center"
           }}
           className="hero-grid"
         >
-          {/* Left Content */}
-          <div style={{ textAlign: "left" }}>
-            <span
-              style={{
-                background: "rgba(139, 92, 246, 0.1)",
-                border: "1px solid rgba(139, 92, 246, 0.2)",
-                color: "#a78bfa",
-                padding: "0.5rem 1rem",
-                borderRadius: "9999px",
-                fontSize: "0.85rem",
-                fontWeight: 600,
-                letterSpacing: "0.05em",
-                display: "inline-block",
-                marginBottom: "1.5rem"
-              }}
-            >
-              WELCOME TO MY PORTFOLIO
-            </span>
+          {/* Left Column: Personal Brand & Editorial Impact */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+            {/* Top Badges */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", alignItems: "center" }}>
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  backgroundColor: "var(--color-black)",
+                  color: "var(--color-yellow)",
+                  padding: "0.3rem 0.65rem",
+                  borderRadius: "var(--radius-sm)",
+                  border: "2px solid #000000",
+                  boxShadow: "2px 2px 0 #000000",
+                  letterSpacing: "0.04em"
+                }}
+              >
+                <Terminal size={13} strokeWidth={2.5} />
+                {siteConfig.badge}
+              </span>
 
+              {siteConfig.isAvailable && (
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.4rem",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    backgroundColor: "var(--color-white)",
+                    color: "var(--color-charcoal)",
+                    padding: "0.3rem 0.65rem",
+                    borderRadius: "var(--radius-sm)",
+                    border: "2px solid #000000",
+                    boxShadow: "2px 2px 0 #000000"
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      borderRadius: "50%",
+                      backgroundColor: "#16A34A",
+                      display: "inline-block"
+                    }}
+                  />
+                  {siteConfig.availability}
+                </span>
+              )}
+            </div>
+
+            {/* Giant Editorial Headline */}
             <h1
               style={{
-                fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-                lineHeight: 1.1,
-                marginBottom: "1rem",
-                fontWeight: 900
+                fontFamily: "var(--font-display)",
+                fontWeight: 900,
+                fontSize: "clamp(2.5rem, 5.2vw, 4.4rem)",
+                lineHeight: 0.98,
+                letterSpacing: "-0.035em",
+                color: "var(--color-charcoal)",
+                textTransform: "uppercase"
               }}
             >
-              Hi, I'm <br />
-              <span className="text-gradient">
-                <GlitchText text="GIRIDHARAN R" />
+              BUILDING{" "}
+              <span
+                style={{
+                  display: "inline-block",
+                  backgroundColor: "var(--color-black)",
+                  color: "var(--color-yellow)",
+                  padding: "0 0.4rem",
+                  borderRadius: "var(--radius-sm)",
+                  boxShadow: "4px 4px 0 #000000"
+                }}
+              >
+                USEFUL
+              </span>{" "}
+              SOFTWARE.
+              <br />
+              MAKING AI{" "}
+              <span
+                style={{
+                  color: "transparent",
+                  WebkitTextStroke: "2.5px #000000",
+                  textShadow: "3px 3px 0 #FFE17C"
+                }}
+              >
+                PRACTICAL.
               </span>
             </h1>
 
-            <h2
-              style={{
-                fontSize: "clamp(1.2rem, 2.5vw, 2rem)",
-                fontWeight: 600,
-                color: "var(--text-primary)",
-                marginBottom: "1.5rem",
-                height: "2.4em", // preserve height for typing lines
-                display: "flex",
-                alignItems: "center"
-              }}
-            >
-              <span>{text}</span>
-              <span
-                style={{
-                  width: "3px",
-                  height: "1.1em",
-                  backgroundColor: "var(--secondary)",
-                  marginLeft: "4px",
-                  animation: "blink 1s step-end infinite"
-                }}
-                className="cursor-blink"
-              />
-            </h2>
-
+            {/* Supporting Intro Text */}
             <p
               style={{
-                color: "var(--text-secondary)",
-                fontSize: "clamp(1rem, 1.1vw, 1.15rem)",
-                marginBottom: "2.5rem",
+                fontSize: "clamp(1.05rem, 1.4vw, 1.25rem)",
+                lineHeight: 1.55,
+                color: "var(--color-charcoal)",
+                fontWeight: 500,
                 maxWidth: "600px"
               }}
             >
-              An Information Science and Engineering graduate specializing in building creative, 
-              scalable full-stack web applications with Python, Django, ReactJS, and AI integration. 
-              I design modern, intuitive digital experiences with solid backend foundations.
+              I'm <strong style={{ fontWeight: 800 }}>Giridharan</strong>, a Full Stack Developer and Generative AI enthusiast focused on building modern web applications, backend systems, and AI-powered experiences.
             </p>
 
+            {/* Primary Action Buttons */}
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "1.25rem",
+                gap: "0.85rem",
                 alignItems: "center",
-                marginBottom: "3rem"
+                paddingTop: "0.5rem"
               }}
             >
               <a
                 href="#projects"
-                onClick={handleScrollToProjects}
-                className="primary-button"
+                onClick={(e) => handleScroll(e, "projects")}
+                className="btn-brutal btn-primary"
               >
-                View My Work
-                <ArrowRight size={18} />
+                Explore My Projects
+                <ArrowRight size={17} strokeWidth={2.5} />
               </a>
+
               <a
-                href="/giri_resume.pdf"
-                download="GIRIDHARAN_R_Resume.pdf"
-                className="glass-button"
-                target="_blank"
-                rel="noreferrer"
+                href="#contact"
+                onClick={(e) => handleScroll(e, "contact")}
+                className="btn-brutal btn-secondary"
               >
-                <Download size={18} />
-                Download CV
+                Let's Connect
+              </a>
+
+              <a
+                href={siteConfig.resumeUrl}
+                download="Giridharan_R_Resume.pdf"
+                className="btn-brutal btn-outline"
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.4)",
+                  border: "2px solid #000000"
+                }}
+              >
+                <Download size={16} strokeWidth={2.5} />
+                Resume
               </a>
             </div>
 
-            {/* Social Links */}
-            <div style={{ display: "flex", gap: "1.25rem", alignItems: "center" }}>
-              <span style={{ color: "var(--text-muted)", fontSize: "0.9rem", fontWeight: 500 }}>
-                CONNECT WITH ME:
-              </span>
-              <div style={{ display: "flex", gap: "1rem" }}>
-                <a
-                  href="https://github.com/GDlion1"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="social-icon"
-                >
-                  <Github size={20} />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/giridharan-r-93a024316"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="social-icon"
-                >
-                  <Linkedin size={20} />
-                </a>
-                <a href="mailto:gdlion123@email.com" className="social-icon">
-                  <Mail size={20} />
-                </a>
+            {/* Quick Tech Labels */}
+            <div style={{ marginTop: "1rem" }}>
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  color: "#3F4A42",
+                  marginBottom: "0.5rem"
+                }}
+              >
+                Core Engineering Stack:
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
+                {siteConfig.quickTech.map((tech) => (
+                  <span key={tech} className="tech-chip">
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Right Visual Element */}
-          <div
-            style={{
-              position: "relative",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-            className="hero-graphic-container"
-          >
-            {/* Glowing, floating creative element */}
-            <div
-              className="float"
-              style={{
-                width: "clamp(240px, 75vw, 300px)",
-                height: "clamp(240px, 75vw, 300px)",
-                borderRadius: "50%",
-                background: "var(--accent-gradient)",
-                boxShadow: "0 0 40px var(--primary-glow)",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "relative"
-              }}
-            >
-              <img
-                src="/image.png"
-                alt="Giridharan R"
-                style={{
-                  width: "calc(100% - 10px)",
-                  height: "calc(100% - 10px)",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  border: "4px solid var(--bg-color)",
-                  display: "block",
-                  transition: "border-color 0.3s ease"
-                }}
-              />
-
-              {/* Orbiting particles/nodes */}
-              <div className="orbit-item" style={{ position: "absolute", top: "-10px", left: "20px" }}>
-                <span className="dot-glow" style={{ backgroundColor: "#06b6d4" }} />
-              </div>
-              <div className="orbit-item" style={{ position: "absolute", bottom: "10px", right: "20px" }}>
-                <span className="dot-glow" style={{ backgroundColor: "#8b5cf6" }} />
-              </div>
-              <div className="orbit-item" style={{ position: "absolute", bottom: "40px", left: "-10px" }}>
-                <span className="dot-glow" style={{ backgroundColor: "#6366f1" }} />
-              </div>
-            </div>
+          {/* Right Column: Dark Developer Workspace */}
+          <div style={{ width: "100%", maxWidth: "620px", justifySelf: "center" }}>
+            <DeveloperWorkspace />
           </div>
         </div>
       </div>
 
       <style>{`
-        @keyframes blink {
-          50% { opacity: 0; }
-        }
-        .social-icon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          color: var(--text-secondary);
-          transition: all 0.3s ease;
-        }
-        .social-icon:hover {
-          color: white;
-          background: rgba(99, 102, 241, 0.2);
-          border-color: rgba(99, 102, 241, 0.4);
-          transform: translateY(-3px);
-          box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
-        }
-        .dot-glow {
-          display: block;
-          width: 14px;
-          height: 14px;
-          border-radius: 50%;
-          box-shadow: 0 0 10px currentColor;
-          animation: float 4s ease-in-out infinite;
-        }
-        @media (max-width: 768px) {
+        @media (min-width: 1024px) {
           .hero-grid {
-            grid-template-columns: 1fr !important;
-            text-align: center !important;
-          }
-          .hero-grid > div {
-            text-align: center !important;
-          }
-          .hero-grid p {
-            margin-left: auto;
-            margin-right: auto;
-          }
-          .hero-grid div {
-            justify-content: center;
-          }
-          .hero-graphic-container {
-            margin-top: 2rem;
-            order: -1;
+            grid-template-columns: 1.15fr 1fr !important;
           }
         }
       `}</style>

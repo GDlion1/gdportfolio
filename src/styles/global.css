@@ -1,0 +1,275 @@
+@import './tokens.css';
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-charcoal);
+  background-color: var(--color-yellow);
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline-offset: 3px;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Background Patterns */
+.bg-yellow-dots {
+  background-color: var(--color-yellow);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+}
+
+.bg-charcoal {
+  background-color: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+.bg-white {
+  background-color: var(--color-white);
+  color: var(--color-charcoal);
+}
+
+.bg-sage {
+  background-color: var(--color-sage);
+  color: var(--color-charcoal);
+}
+
+.bg-neutral {
+  background-color: var(--color-neutral);
+  color: var(--color-charcoal);
+}
+
+/* Section Containers */
+.section-wrapper {
+  padding: 5.5rem 0;
+  position: relative;
+  border-bottom: var(--border-thick);
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.75rem;
+  background: var(--color-black);
+  color: var(--color-yellow);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-label.light {
+  background: var(--color-yellow);
+  color: var(--color-black);
+}
+
+.section-headline {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+}
+
+.section-desc {
+  font-size: 1.15rem;
+  max-width: 680px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Neo-Brutalist Push Buttons */
+.btn-brutal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.85rem 1.6rem;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-tactile);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-brutal:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-brutal:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 #000000;
+}
+
+/* Button Variants */
+.btn-primary {
+  background: var(--color-black);
+  color: var(--color-yellow);
+}
+.btn-primary:hover {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+.btn-secondary {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+.btn-secondary:hover {
+  background: #FAFAFA;
+}
+
+.btn-yellow {
+  background: var(--color-yellow);
+  color: var(--color-black);
+}
+.btn-yellow:hover {
+  background: #FFE896;
+}
+
+.btn-sage {
+  background: var(--color-sage);
+  color: var(--color-charcoal);
+}
+.btn-sage:hover {
+  background: #C4D3CF;
+}
+
+.btn-outline {
+  background: transparent;
+  color: inherit;
+}
+.btn-outline:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Neo-Brutalist Cards */
+.brutal-card {
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-tactile);
+}
+
+.brutal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.brutal-card-lg {
+  border: var(--border-thick);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-tactile);
+}
+
+.brutal-card-lg:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Badges and Chips */
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border: 1.5px solid #000000;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-black);
+  box-shadow: 2px 2px 0 #000000;
+  white-space: nowrap;
+}
+
+.tech-chip.dark {
+  background: var(--color-dark-surface);
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 2px 2px 0 #000000;
+}
+
+.tech-chip.sage {
+  background: var(--color-sage);
+  color: var(--color-charcoal);
+  border-color: #000000;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

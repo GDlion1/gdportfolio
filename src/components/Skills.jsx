@@ -1,127 +1,196 @@
-import { Code2, Layout, Database, Wrench } from "lucide-react";
+import { skillCategories } from "../data/skillsData";
+import { Server, Layout, Sparkles, Database, Wrench, Binary } from "lucide-react";
 
 export default function Skills() {
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      icon: <Code2 size={24} style={{ color: "#a78bfa" }} />,
-      skills: [
-        { name: "Python", level: 90 },
-        { name: "JavaScript (ES6+)", level: 85 },
-        { name: "HTML5 / CSS3", level: 95 },
-        { name: "SQL", level: 80 },
-      ],
-    },
-    {
-      title: "Frameworks & Libraries",
-      icon: <Layout size={24} style={{ color: "#06b6d4" }} />,
-      skills: [
-        { name: "ReactJS", level: 85 },
-        { name: "Django", level: 90 },
-        { name: "FastAPI / Flask", level: 80 },
-        { name: "Bootstrap", level: 85 },
-      ],
-    },
-    {
-      title: "Databases",
-      icon: <Database size={24} style={{ color: "#6366f1" }} />,
-      skills: [
-        { name: "MySQL", level: 85 },
-        { name: "SQLite", level: 80 },
-        { name: "MongoDB", level: 70 },
-      ],
-    },
-    {
-      title: "Tools & Platforms",
-      icon: <Wrench size={24} style={{ color: "#f43f5e" }} />,
-      skills: [
-        { name: "Git & GitHub", level: 90 },
-        { name: "VS Code", level: 95 },
-        { name: "Power BI", level: 75 },
-        { name: "Tableau", level: 70 },
-      ],
-    },
-  ];
+  const getCategoryIcon = (id) => {
+    switch (id) {
+      case "backend":
+        return Server;
+      case "frontend":
+        return Layout;
+      case "genai":
+        return Sparkles;
+      case "databases":
+        return Database;
+      case "tools":
+        return Wrench;
+      case "cs":
+        return Binary;
+      default:
+        return Server;
+    }
+  };
 
   return (
-    <section id="skills" style={{ position: "relative" }}>
+    <section id="skills" className="section-wrapper bg-yellow-dots">
       <div className="container">
-        <h2 className="section-title">Technical Expertise</h2>
-        
+        {/* Section Header */}
+        <div style={{ marginBottom: "3.5rem" }}>
+          <div className="section-label">02 / ENGINEERING TOOLKIT</div>
+          <h2 className="section-headline">TOOLS I USE TO BUILD AND SHIP.</h2>
+          <p className="section-desc" style={{ color: "var(--color-charcoal)" }}>
+            A verified inventory of technologies, frameworks, and engineering competencies drawn directly from hands-on project implementations.
+          </p>
+        </div>
+
+        {/* 6-Card Bento Grid */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
-            gap: "2rem",
-            marginTop: "1rem"
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "1.75rem"
           }}
         >
-          {skillCategories.map((category, idx) => (
-            <div
-              key={idx}
-              className="glass-card glow-card"
-              style={{
-                padding: "2rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.5rem"
-              }}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-              }}
-            >
-              {/* Category Header */}
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                <div className="card-icon-wrapper">
-                  {category.icon}
-                </div>
-                <h3 style={{ fontSize: "1.25rem", fontWeight: 700 }}>
-                  {category.title}
-                </h3>
-              </div>
+          {skillCategories.map((cat) => {
+            const Icon = getCategoryIcon(cat.id);
+            const isHighlightCard = cat.id === "genai" || cat.id === "backend";
 
-              {/* Skills list inside category */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                {category.skills.map((skill, sIdx) => (
-                  <div key={sIdx} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem" }}>
-                      <span style={{ fontWeight: 500, color: "var(--text-primary)" }}>
-                        {skill.name}
-                      </span>
-                      <span style={{ color: "var(--text-secondary)", fontWeight: 600 }}>
-                        {skill.level}%
-                      </span>
+            return (
+              <div
+                key={cat.id}
+                className="brutal-card skill-bento-card"
+                style={{
+                  backgroundColor: isHighlightCard ? "var(--color-white)" : "var(--color-white)",
+                  padding: "1.75rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  gap: "1.25rem",
+                  position: "relative"
+                }}
+              >
+                <div>
+                  {/* Card Header */}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      marginBottom: "1rem"
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        backgroundColor: "var(--color-sage)",
+                        border: "var(--border-thick)",
+                        borderRadius: "var(--radius-sm)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "3px 3px 0 #000000",
+                        transition: "var(--transition-tactile)"
+                      }}
+                      className="skill-icon-box"
+                    >
+                      <Icon size={22} strokeWidth={2.2} color="var(--color-charcoal)" />
                     </div>
-                    {/* Skill progress bar track */}
-                    <div className="progress-track">
-                      {/* Skill progress filler */}
-                      <div
-                        className="skill-progress-bar"
-                        style={{
-                          height: "100%",
-                          width: `${skill.level}%`,
-                          background: "var(--accent-gradient)",
-                          borderRadius: "3px",
-                          transformOrigin: "left center",
-                          transition: "transform 1.5s cubic-bezier(0.16, 1, 0.3, 1)"
-                        }}
-                      />
-                    </div>
+
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "0.8rem",
+                        fontWeight: 800,
+                        backgroundColor: "var(--color-neutral)",
+                        border: "1.5px solid #000000",
+                        padding: "0.2rem 0.5rem",
+                        borderRadius: "var(--radius-sm)"
+                      }}
+                    >
+                      {cat.number}
+                    </span>
                   </div>
-                ))}
+
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 850,
+                      fontSize: "1.35rem",
+                      marginBottom: "0.45rem",
+                      color: "var(--color-charcoal)"
+                    }}
+                  >
+                    {cat.title}
+                  </h3>
+
+                  <p
+                    style={{
+                      fontSize: "0.88rem",
+                      color: "#4A5568",
+                      lineHeight: 1.5,
+                      marginBottom: "1.25rem"
+                    }}
+                  >
+                    {cat.description}
+                  </p>
+
+                  {/* Skills Tag Pills */}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
+                    {cat.skills.map((skill, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="skill-pill"
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: "0.78rem",
+                          fontWeight: 600,
+                          padding: "0.3rem 0.6rem",
+                          backgroundColor: "var(--color-neutral)",
+                          border: "1.5px solid #000000",
+                          borderRadius: "var(--radius-sm)",
+                          boxShadow: "2px 2px 0 #000000",
+                          transition: "var(--transition-tactile)",
+                          display: "inline-block"
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Highlight Indicator */}
+                <div
+                  style={{
+                    borderTop: "1.5px dashed rgba(0, 0, 0, 0.2)",
+                    paddingTop: "0.75rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.75rem"
+                  }}
+                >
+                  <span style={{ color: "#666666" }}>Key Focus:</span>
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      backgroundColor: "var(--color-yellow)",
+                      padding: "0.15rem 0.45rem",
+                      border: "1px solid #000000",
+                      borderRadius: "2px"
+                    }}
+                  >
+                    {cat.highlight}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
       <style>{`
-        /* Optional hover effect triggers progress bars */
-        .glass-card:hover .skill-progress-bar {
-          filter: brightness(1.2);
-          box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+        .skill-bento-card:hover .skill-icon-box {
+          background-color: var(--color-yellow) !important;
+          transform: translate(-1px, -1px);
+          box-shadow: 4px 4px 0 #000000 !important;
+        }
+
+        .skill-bento-card:hover .skill-pill:hover {
+          background-color: var(--color-yellow) !important;
+          transform: translateY(-2px);
         }
       `}</style>
     </section>

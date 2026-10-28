@@ -1,334 +1,412 @@
 import { useState } from "react";
-import { Phone, Mail, Send, CheckCircle } from "lucide-react";
-import { Linkedin } from "./Icons";
+import { Mail, Phone, ExternalLink, Download, Copy, Check, Send } from "lucide-react";
+import { siteConfig } from "../data/siteConfig";
 
 export default function Contact() {
-  const [formState, setFormState] = useState({ name: "", email: "", subject: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle, sending, success, error
+  const [copiedType, setCopiedType] = useState(null);
+  const [composerState, setComposerState] = useState({
+    name: "",
+    email: "",
+    subject: "Full Stack / AI Opportunity",
+    message: ""
+  });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({ ...prev, [name]: value }));
+  const handleCopy = (text, type) => {
+    navigator.clipboard.writeText(text);
+    setCopiedType(type);
+    setTimeout(() => setCopiedType(null), 2200);
   };
 
-  const handleSubmit = (e) => {
+  const handleLaunchEmail = (e) => {
     e.preventDefault();
-    if (!formState.name || !formState.email || !formState.message) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-    
-    setStatus("sending");
-    
-    // Simulate API call for premium interaction feel
-    setTimeout(() => {
-      setStatus("success");
-      setFormState({ name: "", email: "", subject: "", message: "" });
-    }, 1500);
+    const mailtoSubject = encodeURIComponent(`[Portfolio] ${composerState.subject || "Full Stack / AI Opportunity"}`);
+    const mailtoBody = encodeURIComponent(
+      `Hi Giridharan,\n\nName: ${composerState.name || "A recruiter / collaborator"}\nContact: ${composerState.email || "Not specified"}\n\nMessage:\n${composerState.message || "I came across your portfolio and would like to discuss an opportunity."}\n\nBest regards.`
+    );
+    window.location.href = `mailto:${siteConfig.email}?subject=${mailtoSubject}&body=${mailtoBody}`;
   };
-
-  const contactDetails = [
-    {
-      icon: <Phone size={20} style={{ color: "#06b6d4" }} />,
-      label: "Phone",
-      value: "+91 9353293224",
-      href: "tel:+919353293224"
-    },
-    {
-      icon: <Mail size={20} style={{ color: "#8b5cf6" }} />,
-      label: "Email",
-      value: "gdlion123@email.com",
-      href: "mailto:gdlion123@email.com"
-    },
-    {
-      icon: <Linkedin size={20} style={{ color: "#6366f1" }} />,
-      label: "LinkedIn",
-      value: "giridharan-r-93a024316",
-      href: "https://www.linkedin.com/in/giridharan-r-93a024316"
-    }
-  ];
 
   return (
-    <section id="contact" style={{ position: "relative" }}>
+    <section id="contact" className="section-wrapper bg-yellow-dots">
       <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
-        <p
-          style={{
-            textAlign: "center",
-            color: "var(--text-secondary)",
-            maxWidth: "600px",
-            margin: "-1.5rem auto 3rem auto",
-            fontSize: "1rem"
-          }}
-        >
-          Have a question or want to work together? Drop me a line!
-        </p>
+        {/* Section Header */}
+        <div style={{ marginBottom: "3.5rem" }}>
+          <div className="section-label">07 / LET'S CONNECT</div>
+          <h2 className="section-headline">LET'S BUILD SOMETHING MEANINGFUL.</h2>
+          <p className="section-desc" style={{ color: "var(--color-charcoal)" }}>
+            I'm interested in opportunities where I can build useful software, develop backend systems, and apply Generative AI to practical problems.
+          </p>
+        </div>
 
+        {/* 2-Column Contact Layout */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "0.8fr 1.2fr",
-            gap: "3rem",
-            alignItems: "stretch"
+            gridTemplateColumns: "1fr",
+            gap: "2.5rem"
           }}
-          className="contact-grid"
+          className="contact-layout-grid"
         >
-          {/* Left Side: Contact Information Cards */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-            {contactDetails.map((detail, idx) => (
-              <a
-                key={idx}
-                href={detail.href}
-                target={detail.label === "LinkedIn" ? "_blank" : "_self"}
-                rel="noreferrer"
-                className="glass-card contact-card glow-card"
-                style={{
-                  padding: "1.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1.25rem",
-                  transition: "all 0.3s ease"
-                }}
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                  e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                }}
-              >
-                <div className="card-icon-wrapper">
-                  {detail.icon}
-                </div>
-                <div>
-                  <span
-                    style={{
-                      fontSize: "0.8rem",
-                      textTransform: "uppercase",
-                      color: "var(--text-muted)",
-                      fontWeight: 600,
-                      letterSpacing: "0.05em",
-                      display: "block",
-                      marginBottom: "0.2rem"
-                    }}
-                  >
-                    {detail.label}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "1.05rem",
-                      fontWeight: 600,
-                      color: "var(--text-primary)"
-                    }}
-                  >
-                    {detail.value}
-                  </span>
-                </div>
-              </a>
-            ))}
-
-            {/* Creative glowing box */}
+          {/* Left Column: Direct Recruiter Channels */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+            {/* Direct Email Card */}
             <div
-              className="glass-card glow-card"
+              className="brutal-card"
               style={{
-                padding: "2rem",
-                flexGrow: 1,
+                backgroundColor: "var(--color-white)",
+                padding: "1.5rem",
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
                 alignItems: "center",
-                textAlign: "center",
-                background: "linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%)",
-                border: "1px solid var(--card-border)"
-              }}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "1rem"
               }}
             >
-              <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 700, marginBottom: "0.5rem" }}>
-                Let's Build Something Awesome
-              </h4>
-              <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", maxWidth: "250px" }}>
-                Open to full-stack roles, freelance opportunities, and interesting AI collaborations.
-              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    backgroundColor: "var(--color-yellow)",
+                    border: "var(--border-thick)",
+                    borderRadius: "var(--radius-sm)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "2px 2px 0 #000000"
+                  }}
+                >
+                  <Mail size={22} color="var(--color-black)" strokeWidth={2.5} />
+                </div>
+                <div>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "#666666", fontWeight: 700 }}>
+                    DIRECT EMAIL
+                  </span>
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 850,
+                      fontSize: "1.1rem",
+                      color: "var(--color-charcoal)",
+                      display: "block"
+                    }}
+                  >
+                    {siteConfig.email}
+                  </a>
+                </div>
+              </div>
+
+              <button
+                onClick={() => handleCopy(siteConfig.email, "email")}
+                className="btn-brutal btn-secondary"
+                style={{ padding: "0.5rem 0.85rem", fontSize: "0.78rem" }}
+              >
+                {copiedType === "email" ? <Check size={14} color="#16A34A" /> : <Copy size={14} />}
+                {copiedType === "email" ? "Copied!" : "Copy Email"}
+              </button>
+            </div>
+
+            {/* Direct Phone Card */}
+            <div
+              className="brutal-card"
+              style={{
+                backgroundColor: "var(--color-white)",
+                padding: "1.5rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "1rem"
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    backgroundColor: "var(--color-sage)",
+                    border: "var(--border-thick)",
+                    borderRadius: "var(--radius-sm)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "2px 2px 0 #000000"
+                  }}
+                >
+                  <Phone size={20} color="var(--color-black)" strokeWidth={2.5} />
+                </div>
+                <div>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "#666666", fontWeight: 700 }}>
+                    DIRECT PHONE / WHATSAPP
+                  </span>
+                  <a
+                    href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 850,
+                      fontSize: "1.1rem",
+                      color: "var(--color-charcoal)",
+                      display: "block"
+                    }}
+                  >
+                    {siteConfig.phone}
+                  </a>
+                </div>
+              </div>
+
+              <button
+                onClick={() => handleCopy(siteConfig.phone, "phone")}
+                className="btn-brutal btn-secondary"
+                style={{ padding: "0.5rem 0.85rem", fontSize: "0.78rem" }}
+              >
+                {copiedType === "phone" ? <Check size={14} color="#16A34A" /> : <Copy size={14} />}
+                {copiedType === "phone" ? "Copied!" : "Copy Phone"}
+              </button>
+            </div>
+
+            {/* LinkedIn & GitHub Cards Grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="brutal-card"
+                style={{
+                  backgroundColor: "var(--color-white)",
+                  padding: "1.25rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.4rem"
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 800, color: "#0077B5" }}>
+                    LINKEDIN
+                  </span>
+                  <ExternalLink size={14} />
+                </div>
+                <strong style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem" }}>
+                  Connect on LinkedIn &rarr;
+                </strong>
+                <span style={{ fontSize: "0.78rem", color: "#666666" }}>
+                  View full recommendations &amp; posts
+                </span>
+              </a>
+
+              <a
+                href={siteConfig.github}
+                target="_blank"
+                rel="noreferrer"
+                className="brutal-card"
+                style={{
+                  backgroundColor: "var(--color-white)",
+                  padding: "1.25rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.4rem"
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 800, color: "#171E19" }}>
+                    GITHUB
+                  </span>
+                  <ExternalLink size={14} />
+                </div>
+                <strong style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem" }}>
+                  Inspect Codebase &rarr;
+                </strong>
+                <span style={{ fontSize: "0.78rem", color: "#666666" }}>
+                  Public repositories &amp; commits
+                </span>
+              </a>
+            </div>
+
+            {/* Resume Download Action Banner */}
+            <div
+              className="brutal-card"
+              style={{
+                backgroundColor: "var(--color-charcoal)",
+                color: "var(--color-white)",
+                padding: "1.5rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "1rem"
+              }}
+            >
+              <div>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--color-yellow)", fontWeight: 700 }}>
+                  OFFICIAL RESUME
+                </span>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 850, fontSize: "1.15rem", marginTop: "0.2rem" }}>
+                  Giridharan_R_Resume.pdf
+                </div>
+                <span style={{ fontSize: "0.78rem", color: "var(--color-sage)" }}>
+                  Verified 2026 ISE Graduate &bull; Bangalore
+                </span>
+              </div>
+
+              <a
+                href={siteConfig.resumeUrl}
+                download="Giridharan_R_Resume.pdf"
+                className="btn-brutal btn-yellow"
+                style={{ padding: "0.6rem 1.15rem", fontSize: "0.85rem" }}
+              >
+                <Download size={16} strokeWidth={2.5} />
+                Download PDF
+              </a>
             </div>
           </div>
 
-          {/* Right Side: Contact Form */}
+          {/* Right Column: Direct Message Composer (100% Functional Native Mailto) */}
           <div
-            className="glass-card glow-card"
-            style={{ padding: "2.5rem", position: "relative", overflow: "hidden" }}
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-              e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            className="brutal-card-lg"
+            style={{
+              backgroundColor: "var(--color-white)",
+              padding: "2rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1.25rem"
             }}
           >
-            {status !== "success" ? (
-              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }} className="form-row">
-                  {/* Name field */}
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formState.name}
-                      onChange={handleInputChange}
-                      placeholder="Name"
-                      className="input-field"
-                    />
-                  </div>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.4rem" }}>
+                <span
+                  style={{
+                    backgroundColor: "var(--color-yellow)",
+                    border: "1px solid #000",
+                    padding: "0.15rem 0.45rem",
+                    borderRadius: "2px",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.7rem",
+                    fontWeight: 800
+                  }}
+                >
+                  DIRECT CLIENT DISPATCH
+                </span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "#666666" }}>
+                  // Zero-Spam / Verified Delivery
+                </span>
+              </div>
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "1.5rem", textTransform: "uppercase" }}>
+                Send A Quick Message
+              </h3>
+              <p style={{ fontSize: "0.88rem", color: "#4A5568" }}>
+                Draft your inquiry below to trigger a pre-filled email directly to <strong>{siteConfig.email}</strong>.
+              </p>
+            </div>
 
-                  {/* Email field */}
-                  <div className="input-group">
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formState.email}
-                      onChange={handleInputChange}
-                      placeholder="Email Address"
-                      className="input-field"
-                    />
-                  </div>
-                </div>
-
-                {/* Subject field */}
-                <div className="input-group">
-                    <input
-                      type="text"
-                      name="subject"
-                      value={formState.subject}
-                      onChange={handleInputChange}
-                      placeholder="Subject"
-                      className="input-field"
-                    />
-                </div>
-
-                {/* Message field */}
-                <div className="input-group">
-                  <textarea
-                    name="message"
-                    required
-                    rows="5"
-                    value={formState.message}
-                    onChange={handleInputChange}
-                    placeholder="Your Message"
-                    className="input-field"
+            <form onSubmit={handleLaunchEmail} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }} className="composer-row">
+                <div>
+                  <label style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, marginBottom: "0.25rem" }}>
+                    YOUR NAME:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Hiring Manager"
+                    value={composerState.name}
+                    onChange={(e) => setComposerState({ ...composerState, name: e.target.value })}
+                    style={{
+                      width: "100%",
+                      padding: "0.65rem 0.85rem",
+                      border: "var(--border-thick)",
+                      borderRadius: "var(--radius-sm)",
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.9rem",
+                      backgroundColor: "var(--color-neutral)"
+                    }}
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={status === "sending"}
-                  className="primary-button"
-                  style={{
-                    alignSelf: "flex-start",
-                    marginTop: "0.5rem",
-                    gap: "0.75rem",
-                    minWidth: "150px",
-                    justifyContent: "center"
-                  }}
-                >
-                  {status === "sending" ? (
-                    <>
-                      <div className="spinner" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Send size={18} />
-                    </>
-                  )}
-                </button>
-              </form>
-            ) : (
-              /* Success Panel animation */
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  minHeight: "300px",
-                  textAlign: "center",
-                  gap: "1.5rem"
-                }}
-              >
-                <div style={{ color: "#10b981", animation: "float 4s ease-in-out infinite" }}>
-                  <CheckCircle size={64} />
-                </div>
                 <div>
-                  <h3
+                  <label style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, marginBottom: "0.25rem" }}>
+                    YOUR EMAIL:
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="e.g. recruiter@company.com"
+                    value={composerState.email}
+                    onChange={(e) => setComposerState({ ...composerState, email: e.target.value })}
                     style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "1.75rem",
-                      fontWeight: 800,
-                      marginBottom: "0.5rem"
+                      width: "100%",
+                      padding: "0.65rem 0.85rem",
+                      border: "var(--border-thick)",
+                      borderRadius: "var(--radius-sm)",
+                      fontFamily: "var(--font-body)",
+                      fontSize: "0.9rem",
+                      backgroundColor: "var(--color-neutral)"
                     }}
-                  >
-                    Message Sent!
-                  </h3>
-                  <p style={{ color: "var(--text-secondary)", maxWidth: "320px", fontSize: "0.95rem" }}>
-                    Thank you, Giridharan here! I have received your message and will respond as soon as possible.
-                  </p>
+                  />
                 </div>
-                <button
-                  onClick={() => setStatus("idle")}
-                  className="glass-button"
-                  style={{ fontSize: "0.9rem" }}
-                >
-                  Send another message
-                </button>
               </div>
-            )}
+
+              <div>
+                <label style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, marginBottom: "0.25rem" }}>
+                  SUBJECT:
+                </label>
+                <input
+                  type="text"
+                  value={composerState.subject}
+                  onChange={(e) => setComposerState({ ...composerState, subject: e.target.value })}
+                  style={{
+                    width: "100%",
+                    padding: "0.65rem 0.85rem",
+                    border: "var(--border-thick)",
+                    borderRadius: "var(--radius-sm)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.9rem",
+                    backgroundColor: "var(--color-neutral)"
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, marginBottom: "0.25rem" }}>
+                  MESSAGE:
+                </label>
+                <textarea
+                  rows={4}
+                  placeholder="Tell me about the engineering role, team, or project requirements..."
+                  value={composerState.message}
+                  onChange={(e) => setComposerState({ ...composerState, message: e.target.value })}
+                  style={{
+                    width: "100%",
+                    padding: "0.65rem 0.85rem",
+                    border: "var(--border-thick)",
+                    borderRadius: "var(--radius-sm)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.9rem",
+                    backgroundColor: "var(--color-neutral)",
+                    resize: "vertical"
+                  }}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="btn-brutal btn-primary"
+                style={{ width: "100%", padding: "0.85rem" }}
+              >
+                <Send size={16} />
+                Launch In Default Email Client
+              </button>
+            </form>
           </div>
         </div>
       </div>
 
       <style>{`
-        .contact-card:hover {
-          border-color: var(--card-border-hover);
-          transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(6, 182, 212, 0.1);
-        }
-        
-        /* Input group styles */
-        .input-group {
-          position: relative;
-          width: 100%;
-        }
-        .input-group input, .input-group textarea {
-          width: 100%;
-        }
-        .input-group textarea {
-          resize: none;
-        }
-
-        /* CSS Spinner */
-        .spinner {
-          width: 18px;
-          height: 18px;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          border-top: 2px solid white;
-          border-radius: 50%;
-          animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-          100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-          .contact-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2.5rem !important;
+        @media (min-width: 960px) {
+          .contact-layout-grid {
+            grid-template-columns: 1fr 1fr !important;
           }
-          .form-row {
+        }
+        @media (max-width: 500px) {
+          .composer-row {
             grid-template-columns: 1fr !important;
-            gap: 1.5rem !important;
           }
         }
       `}</style>
