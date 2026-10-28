@@ -56,7 +56,7 @@ export default function Footer() {
                   letterSpacing: "-0.05em"
                 }}
               >
-                GR
+                GD
               </span>
             </div>
 

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <rect width="64" height="64" rx="8" fill="#171E19" />
   <rect x="2" y="2" width="60" height="60" rx="6" fill="#171E19" stroke="#FFE17C" stroke-width="2" />
-  <text x="32" y="44" font-family="'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="900" font-size="30" fill="#FFE17C" text-anchor="middle" letter-spacing="-1">GR</text>
+  <text x="32" y="44" font-family="'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="900" font-size="30" fill="#FFE17C" text-anchor="middle" letter-spacing="-1">GD</text>
 </svg>

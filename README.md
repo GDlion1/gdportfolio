@@ -28,7 +28,7 @@ Built for Giridharan R, Information Science and Engineering graduate (2026), pur
 
 ## 🚀 Sections & Features
 
-1. **Sticky Header & Brand Monogram:** Geometric `GR` mark, section jumps with scroll offset, resume download, and mobile drawer.
+1. **Sticky Header & Brand Monogram:** Geometric `GD` mark, section jumps with scroll offset, resume download, and mobile drawer.
 2. **Hero & Dark Developer Workspace:**
    - Left: Availability badge (`OPEN TO ENTRY-LEVEL OPPORTUNITIES`), Cabinet Grotesk typography, CTAs, core technology chips.
    - Right: Interactive Dark Developer Workspace with 4 switchable tabs:
