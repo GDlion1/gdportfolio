@@ -39,6 +39,7 @@ export default function Projects() {
 
           {/* Toggle between Resume Priority Projects and All Builds */}
           <div
+            className="project-filter-toggle"
             style={{
               display: "inline-flex",
               border: "var(--border-thick)",
@@ -100,7 +101,16 @@ export default function Projects() {
               className="featured-project-grid"
             >
               {/* Left Details */}
-              <div style={{ padding: "2.25rem 2rem", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "1.5rem" }}>
+              <div
+                className="project-details-body"
+                style={{
+                  padding: "clamp(1.25rem, 3.5vw, 2.25rem)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  gap: "1.5rem"
+                }}
+              >
                 <div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center", marginBottom: "0.75rem" }}>
                     <span
@@ -310,7 +320,10 @@ export default function Projects() {
               overflow: "hidden"
             }}
           >
-            <div style={{ padding: "2.25rem 2rem" }}>
+            <div
+              className="project-details-body"
+              style={{ padding: "clamp(1.25rem, 3.5vw, 2.25rem)" }}
+            >
               {/* Header Info */}
               <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "1.5rem" }}>
                 <div>
@@ -447,6 +460,7 @@ export default function Projects() {
 
                 {/* Horizontal / Wrapped Step Flow */}
                 <div
+                  className="rag-steps-track"
                   style={{
                     display: "grid",
                     gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
@@ -534,7 +548,10 @@ export default function Projects() {
               overflow: "hidden"
             }}
           >
-            <div style={{ padding: "2.5rem 2rem" }}>
+            <div
+              className="project-details-body"
+              style={{ padding: "clamp(1.25rem, 3.5vw, 2.5rem)" }}
+            >
               <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "1.5rem" }}>
                 <div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center", marginBottom: "0.75rem" }}>
@@ -609,9 +626,10 @@ export default function Projects() {
 
               {/* VERA Capabilities Bento */}
               <div
+                className="vera-capabilities-grid"
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
                   gap: "1.25rem",
                   marginBottom: "2rem"
                 }}
@@ -821,6 +839,40 @@ export default function Projects() {
           }
           .rag-problem-expl {
             grid-template-columns: 1fr 1fr !important;
+          }
+        }
+
+        @media (max-width: 959px) {
+          .preview-panel-sage {
+            border-left: none !important;
+            border-top: var(--border-thick) !important;
+            padding: clamp(1rem, 3vw, 1.75rem) !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .rag-steps-track {
+            display: flex !important;
+            overflow-x: auto !important;
+            white-space: nowrap !important;
+            padding-bottom: 0.5rem !important;
+            -webkit-overflow-scrolling: touch !important;
+          }
+          .rag-steps-track > button {
+            min-width: 140px !important;
+            flex-shrink: 0 !important;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .project-filter-toggle {
+            width: 100% !important;
+            display: flex !important;
+          }
+          .project-filter-toggle button {
+            flex: 1 !important;
+            padding: 0.45rem 0.5rem !important;
+            font-size: 0.75rem !important;
           }
         }
       `}</style>

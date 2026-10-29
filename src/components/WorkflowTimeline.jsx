@@ -48,8 +48,8 @@ export default function WorkflowTimeline() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "1.5rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
+            gap: "1.25rem",
             position: "relative"
           }}
           className="workflow-step-grid"
@@ -64,7 +64,7 @@ export default function WorkflowTimeline() {
                 className="brutal-card workflow-card"
                 style={{
                   backgroundColor: isFirstOrLast ? "var(--color-yellow)" : "var(--color-neutral)",
-                  padding: "2rem 1.5rem",
+                  padding: "clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.5rem)",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",

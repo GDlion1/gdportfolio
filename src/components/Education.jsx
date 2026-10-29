@@ -18,8 +18,8 @@ export default function Education() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "2rem"
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
+            gap: "clamp(1.25rem, 3vw, 2rem)"
           }}
           className="background-grid"
         >
@@ -28,7 +28,7 @@ export default function Education() {
             className="brutal-card"
             style={{
               backgroundColor: "var(--color-white)",
-              padding: "2rem 1.75rem",
+              padding: "clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.75rem)",
               display: "flex",
               flexDirection: "column",
               gap: "1.5rem"
@@ -127,7 +127,7 @@ export default function Education() {
             className="brutal-card"
             style={{
               backgroundColor: "var(--color-white)",
-              padding: "2rem 1.75rem",
+              padding: "clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.75rem)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -214,7 +214,7 @@ export default function Education() {
             className="brutal-card"
             style={{
               backgroundColor: "var(--color-white)",
-              padding: "2rem 1.75rem",
+              padding: "clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.75rem)",
               display: "flex",
               flexDirection: "column",
               gap: "1.5rem"

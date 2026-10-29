@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Preloader from "./components/Preloader";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TechnologyMarquee from "./components/TechnologyMarquee";
@@ -11,8 +13,13 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div className="portfolio-app" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      {/* Neo-Brutalist Loading Animation (2.4s moderate duration) */}
+      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+
       {/* 1. Sticky Navigation */}
       <Navbar />
 

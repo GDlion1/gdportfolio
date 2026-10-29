@@ -12,6 +12,7 @@ html {
   scroll-padding-top: var(--nav-height);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -21,6 +22,12 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   font-size: 16px;
+  width: 100%;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Headings */
@@ -30,6 +37,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: inherit;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 a {
@@ -122,11 +131,12 @@ code, pre {
 }
 
 .section-headline {
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: clamp(1.85rem, 4vw, 3.25rem);
   font-weight: 850;
   text-transform: uppercase;
   letter-spacing: -0.025em;
   margin-bottom: 1.25rem;
+  word-wrap: break-word;
 }
 
 .section-desc {
@@ -263,6 +273,84 @@ code, pre {
   border-color: #000000;
 }
 
+/* Responsive Overrides for Mobile Phones & Tablets */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 64px;
+  }
+
+  .container {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
+  }
+
+  .section-wrapper {
+    padding: 3.5rem 0;
+  }
+
+  .section-headline {
+    font-size: clamp(1.75rem, 6.5vw, 2.35rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .btn-brutal {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.88rem;
+    box-shadow: 4px 4px 0 #000000;
+  }
+
+  .btn-brutal:hover {
+    transform: none;
+    box-shadow: 4px 4px 0 #000000;
+  }
+
+  .brutal-card {
+    box-shadow: 4px 4px 0 #000000;
+  }
+
+  .brutal-card:hover {
+    transform: none;
+    box-shadow: 4px 4px 0 #000000;
+  }
+
+  .brutal-card-lg {
+    box-shadow: 5px 5px 0 #000000;
+  }
+
+  .brutal-card-lg:hover {
+    transform: none;
+    box-shadow: 5px 5px 0 #000000;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .section-wrapper {
+    padding: 2.75rem 0;
+  }
+
+  .btn-brutal {
+    padding: 0.7rem 1rem;
+    font-size: 0.82rem;
+  }
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -272,4 +360,3 @@ code, pre {
     scroll-behavior: auto !important;
   }
 }
-

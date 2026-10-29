@@ -113,7 +113,7 @@ export default function Navbar() {
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 850,
-                fontSize: "1.05rem",
+                fontSize: "clamp(0.9rem, 3.5vw, 1.05rem)",
                 color: "var(--color-charcoal)",
                 display: "block",
                 lineHeight: 1.1

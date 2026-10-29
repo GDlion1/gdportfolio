@@ -41,9 +41,10 @@ export default function About() {
           </div>
 
           <div
+            className="lifecycle-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 160px), 1fr))",
               gap: "1rem",
               position: "relative"
             }}
@@ -144,9 +145,10 @@ export default function About() {
           </div>
 
           <div
+            className="focus-areas-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
               gap: "1.25rem"
             }}
           >
@@ -156,7 +158,7 @@ export default function About() {
                 className="brutal-card focus-card"
                 style={{
                   backgroundColor: "var(--color-white)",
-                  padding: "1.5rem",
+                  padding: "clamp(1.15rem, 3vw, 1.5rem)",
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.75rem",

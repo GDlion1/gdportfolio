@@ -35,9 +35,10 @@ export default function Skills() {
 
         {/* 6-Card Bento Grid */}
         <div
+          className="skills-bento-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
             gap: "1.75rem"
           }}
         >
@@ -51,7 +52,7 @@ export default function Skills() {
                 className="brutal-card skill-bento-card"
                 style={{
                   backgroundColor: isHighlightCard ? "var(--color-white)" : "var(--color-white)",
-                  padding: "1.75rem",
+                  padding: "clamp(1.25rem, 3vw, 1.75rem)",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
@@ -191,6 +192,12 @@ export default function Skills() {
         .skill-bento-card:hover .skill-pill:hover {
           background-color: var(--color-yellow) !important;
           transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+          .skills-bento-grid {
+            gap: 1.15rem !important;
+          }
         }
       `}</style>
     </section>

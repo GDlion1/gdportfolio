@@ -180,18 +180,17 @@ export default function ArchitectureLab() {
 
           {/* Node Inspector Panel */}
           <div
+            className="inspector-panel-container"
             style={{
               backgroundColor: "var(--color-dark-surface)",
               border: "var(--border-thick)",
               borderRadius: "var(--radius-md)",
-              padding: "2rem",
+              padding: "clamp(1.25rem, 3.5vw, 2rem)",
               boxShadow: "var(--shadow-xl)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              gap: "1.75rem",
-              position: "sticky",
-              top: "90px"
+              gap: "1.75rem"
             }}
           >
             <div>
@@ -317,6 +316,16 @@ export default function ArchitectureLab() {
         @media (min-width: 992px) {
           .architecture-lab-grid {
             grid-template-columns: 1.1fr 1fr !important;
+          }
+          .inspector-panel-container {
+            position: sticky !important;
+            top: 90px !important;
+          }
+        }
+        @media (max-width: 991px) {
+          .inspector-panel-container {
+            position: relative !important;
+            top: auto !important;
           }
         }
       `}</style>

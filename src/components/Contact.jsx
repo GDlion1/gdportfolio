@@ -54,7 +54,7 @@ export default function Contact() {
               className="brutal-card"
               style={{
                 backgroundColor: "var(--color-white)",
-                padding: "1.5rem",
+                padding: "clamp(1.15rem, 3vw, 1.5rem)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -112,7 +112,7 @@ export default function Contact() {
               className="brutal-card"
               style={{
                 backgroundColor: "var(--color-white)",
-                padding: "1.5rem",
+                padding: "clamp(1.15rem, 3vw, 1.5rem)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -166,7 +166,7 @@ export default function Contact() {
             </div>
 
             {/* LinkedIn & GitHub Cards Grid */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div className="contact-social-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
               <a
                 href={siteConfig.linkedin}
                 target="_blank"
@@ -265,7 +265,7 @@ export default function Contact() {
             className="brutal-card-lg"
             style={{
               backgroundColor: "var(--color-white)",
-              padding: "2rem",
+              padding: "clamp(1.25rem, 3.5vw, 2rem)",
               display: "flex",
               flexDirection: "column",
               gap: "1.25rem"
@@ -404,7 +404,10 @@ export default function Contact() {
             grid-template-columns: 1fr 1fr !important;
           }
         }
-        @media (max-width: 500px) {
+        @media (max-width: 520px) {
+          .contact-social-grid {
+            grid-template-columns: 1fr !important;
+          }
           .composer-row {
             grid-template-columns: 1fr !important;
           }

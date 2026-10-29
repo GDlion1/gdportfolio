@@ -44,6 +44,7 @@ export default function CaseStudyModal({ project, onClose }) {
     >
       <div
         ref={modalRef}
+        className="case-study-modal-card"
         style={{
           width: "100%",
           maxWidth: "860px",
@@ -51,7 +52,7 @@ export default function CaseStudyModal({ project, onClose }) {
           backgroundColor: "var(--color-white)",
           border: "var(--border-thick)",
           borderRadius: "var(--radius-lg)",
-          boxShadow: "12px 12px 0 #000000",
+          boxShadow: "clamp(4px, 2vw, 10px) clamp(4px, 2vw, 10px) 0 #000000",
           overflowY: "auto",
           position: "relative",
           display: "flex",
@@ -66,7 +67,7 @@ export default function CaseStudyModal({ project, onClose }) {
             zIndex: 10,
             backgroundColor: "var(--color-yellow)",
             borderBottom: "var(--border-thick)",
-            padding: "1rem 1.5rem",
+            padding: "0.85rem clamp(1rem, 3vw, 1.5rem)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -114,7 +115,7 @@ export default function CaseStudyModal({ project, onClose }) {
         </div>
 
         {/* Modal Scrollable Body */}
-        <div style={{ padding: "1.75rem 1.5rem", display: "flex", flexDirection: "column", gap: "2rem" }}>
+        <div style={{ padding: "clamp(1.25rem, 3.5vw, 1.75rem) clamp(1rem, 3vw, 1.5rem)", display: "flex", flexDirection: "column", gap: "1.75rem" }}>
           {/* Title & Value Proposition */}
           <div>
             <h2
