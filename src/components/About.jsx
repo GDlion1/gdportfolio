@@ -14,7 +14,7 @@ export default function About() {
     <section id="about" className="section-wrapper bg-white">
       <div className="container">
         {/* Section Header */}
-        <div style={{ marginBottom: "3.5rem" }}>
+        <div style={{ marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}>
           <div className="section-label">01 / ABOUT</div>
           <h2 className="section-headline">
             AN ENGINEER FOCUSED ON BUILDING THINGS THAT WORK.
@@ -25,16 +25,16 @@ export default function About() {
         </div>
 
         {/* Visual Engineering Workflow Strip */}
-        <div style={{ marginBottom: "4.5rem" }}>
+        <div style={{ marginBottom: "clamp(2.5rem, 5vw, 4.5rem)" }}>
           <div
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
+              fontSize: "0.78rem",
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: "0.08em",
               color: "#555555",
-              marginBottom: "1rem"
+              marginBottom: "0.85rem"
             }}
           >
             // ENGINEERING LIFECYCLE:
@@ -44,9 +44,11 @@ export default function About() {
             className="lifecycle-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 160px), 1fr))",
-              gap: "1rem",
-              position: "relative"
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 170px), 1fr))",
+              gap: "0.85rem",
+              position: "relative",
+              width: "100%",
+              minWidth: 0
             }}
           >
             {workflowTiles.map((tile, idx) => (
@@ -55,17 +57,18 @@ export default function About() {
                 className="brutal-card"
                 style={{
                   backgroundColor: idx % 2 === 0 ? "var(--color-yellow)" : "var(--color-neutral)",
-                  padding: "1.25rem",
-                  position: "relative"
+                  padding: "1.15rem",
+                  position: "relative",
+                  minWidth: 0
                 }}
               >
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    fontWeight: 800,
+                    fontSize: "0.72rem",
+                    fontWeight: 850,
                     color: "var(--color-black)",
-                    marginBottom: "0.35rem"
+                    marginBottom: "0.25rem"
                   }}
                 >
                   PHASE {tile.step}
@@ -74,7 +77,7 @@ export default function About() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontWeight: 900,
-                    fontSize: "1.1rem",
+                    fontSize: "1.05rem",
                     color: "var(--color-black)",
                     letterSpacing: "-0.01em",
                     marginBottom: "0.25rem"
@@ -103,21 +106,21 @@ export default function About() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "flex-end",
-              marginBottom: "1.5rem",
+              marginBottom: "1.25rem",
               flexWrap: "wrap",
-              gap: "1rem"
+              gap: "0.75rem"
             }}
           >
             <div>
               <span
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: "0.8rem",
+                  fontSize: "0.78rem",
                   fontWeight: 700,
                   color: "#555555",
                   letterSpacing: "0.08em",
                   display: "block",
-                  marginBottom: "0.3rem"
+                  marginBottom: "0.25rem"
                 }}
               >
                 CORE PRINCIPLES
@@ -126,8 +129,9 @@ export default function About() {
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 850,
-                  fontSize: "1.75rem",
-                  textTransform: "uppercase"
+                  fontSize: "clamp(1.4rem, 3vw, 1.75rem)",
+                  textTransform: "uppercase",
+                  margin: 0
                 }}
               >
                 WHAT I FOCUS ON
@@ -136,7 +140,7 @@ export default function About() {
             <span
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: "0.78rem",
+                fontSize: "0.75rem",
                 color: "#666666"
               }}
             >
@@ -149,7 +153,9 @@ export default function About() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
-              gap: "1.25rem"
+              gap: "1.15rem",
+              width: "100%",
+              minWidth: 0
             }}
           >
             {siteConfig.focusAreas.map((focus, idx) => (
@@ -161,8 +167,9 @@ export default function About() {
                   padding: "clamp(1.15rem, 3vw, 1.5rem)",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "0.75rem",
-                  position: "relative"
+                  gap: "0.65rem",
+                  position: "relative",
+                  minWidth: 0
                 }}
               >
                 <div
@@ -205,8 +212,9 @@ export default function About() {
                   style={{
                     fontFamily: "var(--font-display)",
                     fontWeight: 800,
-                    fontSize: "1.15rem",
-                    color: "var(--color-charcoal)"
+                    fontSize: "1.1rem",
+                    color: "var(--color-charcoal)",
+                    margin: 0
                   }}
                 >
                   {focus.title}
@@ -214,9 +222,10 @@ export default function About() {
 
                 <p
                   style={{
-                    fontSize: "0.9rem",
+                    fontSize: "0.88rem",
                     color: "#4A5568",
-                    lineHeight: 1.55
+                    lineHeight: 1.55,
+                    margin: 0
                   }}
                 >
                   {focus.desc}
@@ -231,6 +240,17 @@ export default function About() {
         .focus-card:hover .focus-icon-box {
           background-color: var(--color-yellow) !important;
           transform: rotate(6deg);
+        }
+
+        @media (max-width: 600px) {
+          .lifecycle-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.75rem !important;
+          }
+          .focus-areas-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.95rem !important;
+          }
         }
       `}</style>
     </section>

@@ -51,7 +51,7 @@ export default function Contact() {
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
             {/* Direct Email Card */}
             <div
-              className="brutal-card"
+              className="brutal-card contact-direct-card"
               style={{
                 backgroundColor: "var(--color-white)",
                 padding: "clamp(1.15rem, 3vw, 1.5rem)",
@@ -62,7 +62,7 @@ export default function Contact() {
                 gap: "1rem"
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.85rem", minWidth: 0 }}>
                 <div
                   style={{
                     width: "44px",
@@ -73,12 +73,13 @@ export default function Contact() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: "2px 2px 0 #000000"
+                    boxShadow: "2px 2px 0 #000000",
+                    flexShrink: 0
                   }}
                 >
                   <Mail size={22} color="var(--color-black)" strokeWidth={2.5} />
                 </div>
-                <div>
+                <div style={{ minWidth: 0 }}>
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "#666666", fontWeight: 700 }}>
                     DIRECT EMAIL
                   </span>
@@ -87,9 +88,10 @@ export default function Contact() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 850,
-                      fontSize: "1.1rem",
+                      fontSize: "clamp(0.95rem, 2.5vw, 1.1rem)",
                       color: "var(--color-charcoal)",
-                      display: "block"
+                      display: "block",
+                      wordBreak: "break-all"
                     }}
                   >
                     {siteConfig.email}
@@ -99,7 +101,7 @@ export default function Contact() {
 
               <button
                 onClick={() => handleCopy(siteConfig.email, "email")}
-                className="btn-brutal btn-secondary"
+                className="btn-brutal btn-secondary contact-direct-btn"
                 style={{ padding: "0.5rem 0.85rem", fontSize: "0.78rem" }}
               >
                 {copiedType === "email" ? <Check size={14} color="#16A34A" /> : <Copy size={14} />}
@@ -109,7 +111,7 @@ export default function Contact() {
 
             {/* Direct Phone Card */}
             <div
-              className="brutal-card"
+              className="brutal-card contact-direct-card"
               style={{
                 backgroundColor: "var(--color-white)",
                 padding: "clamp(1.15rem, 3vw, 1.5rem)",
@@ -120,7 +122,7 @@ export default function Contact() {
                 gap: "1rem"
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.85rem", minWidth: 0 }}>
                 <div
                   style={{
                     width: "44px",
@@ -131,12 +133,13 @@ export default function Contact() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: "2px 2px 0 #000000"
+                    boxShadow: "2px 2px 0 #000000",
+                    flexShrink: 0
                   }}
                 >
                   <Phone size={20} color="var(--color-black)" strokeWidth={2.5} />
                 </div>
-                <div>
+                <div style={{ minWidth: 0 }}>
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "#666666", fontWeight: 700 }}>
                     DIRECT PHONE / WHATSAPP
                   </span>
@@ -145,7 +148,7 @@ export default function Contact() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 850,
-                      fontSize: "1.1rem",
+                      fontSize: "clamp(0.95rem, 2.5vw, 1.1rem)",
                       color: "var(--color-charcoal)",
                       display: "block"
                     }}
@@ -157,7 +160,7 @@ export default function Contact() {
 
               <button
                 onClick={() => handleCopy(siteConfig.phone, "phone")}
-                className="btn-brutal btn-secondary"
+                className="btn-brutal btn-secondary contact-direct-btn"
                 style={{ padding: "0.5rem 0.85rem", fontSize: "0.78rem" }}
               >
                 {copiedType === "phone" ? <Check size={14} color="#16A34A" /> : <Copy size={14} />}
@@ -402,6 +405,17 @@ export default function Contact() {
         @media (min-width: 960px) {
           .contact-layout-grid {
             grid-template-columns: 1fr 1fr !important;
+          }
+        }
+        @media (max-width: 560px) {
+          .contact-direct-card {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 0.85rem !important;
+          }
+          .contact-direct-btn {
+            width: 100% !important;
+            justify-content: center !important;
           }
         }
         @media (max-width: 520px) {

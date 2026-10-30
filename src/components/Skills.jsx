@@ -25,7 +25,7 @@ export default function Skills() {
     <section id="skills" className="section-wrapper bg-yellow-dots">
       <div className="container">
         {/* Section Header */}
-        <div style={{ marginBottom: "3.5rem" }}>
+        <div style={{ marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}>
           <div className="section-label">02 / ENGINEERING TOOLKIT</div>
           <h2 className="section-headline">TOOLS I USE TO BUILD AND SHIP.</h2>
           <p className="section-desc" style={{ color: "var(--color-charcoal)" }}>
@@ -39,7 +39,9 @@ export default function Skills() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-            gap: "1.75rem"
+            gap: "1.5rem",
+            width: "100%",
+            minWidth: 0
           }}
         >
           {skillCategories.map((cat) => {
@@ -57,7 +59,9 @@ export default function Skills() {
                   flexDirection: "column",
                   justifyContent: "space-between",
                   gap: "1.25rem",
-                  position: "relative"
+                  position: "relative",
+                  width: "100%",
+                  minWidth: 0
                 }}
               >
                 <div>
@@ -67,13 +71,13 @@ export default function Skills() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "flex-start",
-                      marginBottom: "1rem"
+                      marginBottom: "0.85rem"
                     }}
                   >
                     <div
                       style={{
-                        width: "44px",
-                        height: "44px",
+                        width: "42px",
+                        height: "42px",
                         backgroundColor: "var(--color-sage)",
                         border: "var(--border-thick)",
                         borderRadius: "var(--radius-sm)",
@@ -81,17 +85,18 @@ export default function Skills() {
                         alignItems: "center",
                         justifyContent: "center",
                         boxShadow: "3px 3px 0 #000000",
-                        transition: "var(--transition-tactile)"
+                        transition: "var(--transition-tactile)",
+                        flexShrink: 0
                       }}
                       className="skill-icon-box"
                     >
-                      <Icon size={22} strokeWidth={2.2} color="var(--color-charcoal)" />
+                      <Icon size={20} strokeWidth={2.2} color="var(--color-charcoal)" />
                     </div>
 
                     <span
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: "0.8rem",
+                        fontSize: "0.78rem",
                         fontWeight: 800,
                         backgroundColor: "var(--color-neutral)",
                         border: "1.5px solid #000000",
@@ -107,9 +112,10 @@ export default function Skills() {
                     style={{
                       fontFamily: "var(--font-display)",
                       fontWeight: 850,
-                      fontSize: "1.35rem",
-                      marginBottom: "0.45rem",
-                      color: "var(--color-charcoal)"
+                      fontSize: "clamp(1.2rem, 2.5vw, 1.35rem)",
+                      marginBottom: "0.35rem",
+                      color: "var(--color-charcoal)",
+                      wordBreak: "break-word"
                     }}
                   >
                     {cat.title}
@@ -117,32 +123,34 @@ export default function Skills() {
 
                   <p
                     style={{
-                      fontSize: "0.88rem",
+                      fontSize: "0.86rem",
                       color: "#4A5568",
                       lineHeight: 1.5,
-                      marginBottom: "1.25rem"
+                      marginBottom: "1.15rem"
                     }}
                   >
                     {cat.description}
                   </p>
 
                   {/* Skills Tag Pills */}
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", width: "100%" }}>
                     {cat.skills.map((skill, sIdx) => (
                       <span
                         key={sIdx}
                         className="skill-pill"
                         style={{
                           fontFamily: "var(--font-mono)",
-                          fontSize: "0.78rem",
+                          fontSize: "0.75rem",
                           fontWeight: 600,
-                          padding: "0.3rem 0.6rem",
+                          padding: "0.25rem 0.55rem",
                           backgroundColor: "var(--color-neutral)",
                           border: "1.5px solid #000000",
                           borderRadius: "var(--radius-sm)",
                           boxShadow: "2px 2px 0 #000000",
                           transition: "var(--transition-tactile)",
-                          display: "inline-block"
+                          display: "inline-block",
+                          maxWidth: "100%",
+                          wordBreak: "break-word"
                         }}
                       >
                         {skill}
@@ -159,8 +167,10 @@ export default function Skills() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: "0.4rem",
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem"
+                    fontSize: "0.72rem"
                   }}
                 >
                   <span style={{ color: "#666666" }}>Key Focus:</span>
@@ -170,7 +180,8 @@ export default function Skills() {
                       backgroundColor: "var(--color-yellow)",
                       padding: "0.15rem 0.45rem",
                       border: "1px solid #000000",
-                      borderRadius: "2px"
+                      borderRadius: "2px",
+                      wordBreak: "break-word"
                     }}
                   >
                     {cat.highlight}
@@ -196,6 +207,7 @@ export default function Skills() {
 
         @media (max-width: 600px) {
           .skills-bento-grid {
+            grid-template-columns: 1fr !important;
             gap: 1.15rem !important;
           }
         }

@@ -22,6 +22,7 @@ export default function Footer() {
       <div className="container">
         {/* Top Footer Row */}
         <div
+          className="footer-top-row"
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -33,11 +34,12 @@ export default function Footer() {
           }}
         >
           {/* Brand Info */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", maxWidth: "100%" }}>
             <div
               style={{
                 width: "48px",
                 height: "48px",
+                flexShrink: 0,
                 backgroundColor: "var(--color-black)",
                 border: "2px solid var(--color-yellow)",
                 borderRadius: "var(--radius-sm)",
@@ -60,7 +62,7 @@ export default function Footer() {
               </span>
             </div>
 
-            <div>
+            <div style={{ minWidth: 0 }}>
               <h3
                 style={{
                   fontFamily: "var(--font-display)",
@@ -76,9 +78,10 @@ export default function Footer() {
               <p
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: "0.8rem",
+                  fontSize: "0.78rem",
                   color: "var(--color-sage)",
-                  letterSpacing: "0.04em"
+                  letterSpacing: "0.03em",
+                  wordBreak: "break-word"
                 }}
               >
                 FULL STACK DEVELOPER &amp; GENERATIVE AI ENGINEER
@@ -87,7 +90,7 @@ export default function Footer() {
           </div>
 
           {/* Direct Social / Destination Links */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+          <div className="footer-actions-wrap" style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
             <a
               href={siteConfig.github}
               target="_blank"
@@ -216,6 +219,17 @@ export default function Footer() {
           color: var(--color-black) !important;
           border-color: #000000 !important;
           transform: translateY(-2px);
+        }
+        @media (max-width: 600px) {
+          .footer-top-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1.5rem !important;
+          }
+          .footer-actions-wrap {
+            width: 100% !important;
+            justify-content: flex-start !important;
+          }
         }
       `}</style>
     </footer>

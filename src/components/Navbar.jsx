@@ -271,7 +271,7 @@ export default function Navbar() {
             </a>
           ))}
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginTop: "0.5rem" }}>
+          <div className="mobile-drawer-actions" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginTop: "0.5rem" }}>
             <a
               href={siteConfig.resumeUrl}
               download="Giridharan_R_Resume.pdf"
@@ -293,6 +293,11 @@ export default function Navbar() {
       )}
 
       <style>{`
+        @media (max-width: 380px) {
+          .mobile-drawer-actions {
+            grid-template-columns: 1fr !important;
+          }
+        }
         @media (min-width: 900px) {
           .desktop-nav {
             display: flex !important;

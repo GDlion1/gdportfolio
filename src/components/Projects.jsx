@@ -195,7 +195,17 @@ export default function Projects() {
                 </div>
 
                 {/* Actions */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", alignItems: "center", paddingTop: "0.5rem", borderTop: "1.5px solid #E2E8F0" }}>
+                <div
+                  className="project-actions-row"
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "0.75rem",
+                    alignItems: "center",
+                    paddingTop: "0.5rem",
+                    borderTop: "1.5px solid #E2E8F0"
+                  }}
+                >
                   <a
                     href={auraProject.liveUrl}
                     target="_blank"
@@ -374,7 +384,7 @@ export default function Projects() {
                   </p>
                 </div>
 
-                <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                <div className="project-actions-row" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                   {ragProject.githubUrl && (
                     <a
                       href={ragProject.githubUrl}
@@ -600,7 +610,7 @@ export default function Projects() {
                   </p>
                 </div>
 
-                <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                <div className="project-actions-row" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                   <button
                     onClick={() => setSelectedCaseStudy(veraProject)}
                     className="btn-brutal btn-yellow"
@@ -861,6 +871,23 @@ export default function Projects() {
           .rag-steps-track > button {
             min-width: 140px !important;
             flex-shrink: 0 !important;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .project-actions-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            width: 100% !important;
+          }
+          .project-actions-row > * {
+            width: 100% !important;
+            justify-content: center !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
+          }
+          .vera-capabilities-grid {
+            grid-template-columns: 1fr !important;
           }
         }
 

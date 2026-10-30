@@ -32,6 +32,7 @@ export default function ArchitectureLab() {
 
         {/* System View Switcher Tabs */}
         <div
+          className="arch-system-tabs"
           style={{
             display: "flex",
             flexWrap: "wrap",
@@ -326,6 +327,19 @@ export default function ArchitectureLab() {
           .inspector-panel-container {
             position: relative !important;
             top: auto !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .arch-system-tabs {
+            flex-direction: column !important;
+            gap: 0.6rem !important;
+          }
+          .arch-system-tabs > button {
+            width: 100% !important;
+            justify-content: center !important;
+            white-space: normal !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
           }
         }
       `}</style>

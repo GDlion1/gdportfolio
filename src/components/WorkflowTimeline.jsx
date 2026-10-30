@@ -166,6 +166,15 @@ export default function WorkflowTimeline() {
           })}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .workflow-step-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

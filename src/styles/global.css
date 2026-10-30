@@ -13,6 +13,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -23,6 +24,14 @@ body {
   overflow-x: hidden;
   font-size: 16px;
   width: 100%;
+  position: relative;
+}
+
+.portfolio-app {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 img, svg, video, canvas {
@@ -61,6 +70,7 @@ button {
 
 code, pre {
   font-family: var(--font-mono);
+  max-width: 100%;
 }
 
 /* Container */
@@ -71,6 +81,7 @@ code, pre {
   margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  box-sizing: border-box;
 }
 
 /* Background Patterns */
@@ -105,6 +116,9 @@ code, pre {
   padding: 5.5rem 0;
   position: relative;
   border-bottom: var(--border-thick);
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .section-label {
@@ -123,6 +137,8 @@ code, pre {
   border-radius: var(--radius-sm);
   margin-bottom: 1.25rem;
   box-shadow: var(--shadow-sm);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .section-label.light {
@@ -137,6 +153,8 @@ code, pre {
   letter-spacing: -0.025em;
   margin-bottom: 1.25rem;
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .section-desc {
@@ -144,6 +162,7 @@ code, pre {
   max-width: 680px;
   line-height: 1.6;
   opacity: 0.9;
+  word-wrap: break-word;
 }
 
 /* Neo-Brutalist Push Buttons */
@@ -164,6 +183,8 @@ code, pre {
   transition: var(--transition-tactile);
   user-select: none;
   white-space: nowrap;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .btn-brutal:hover {
@@ -224,6 +245,9 @@ code, pre {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   transition: var(--transition-tactile);
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .brutal-card:hover {
@@ -236,6 +260,9 @@ code, pre {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   transition: var(--transition-tactile);
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .brutal-card-lg:hover {
@@ -258,6 +285,8 @@ code, pre {
   color: var(--color-black);
   box-shadow: 2px 2px 0 #000000;
   white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .tech-chip.dark {
@@ -285,35 +314,35 @@ code, pre {
   }
 
   .section-wrapper {
-    padding: 3.5rem 0;
+    padding: 3.25rem 0;
   }
 
   .section-headline {
-    font-size: clamp(1.75rem, 6.5vw, 2.35rem);
+    font-size: clamp(1.65rem, 6.5vw, 2.25rem);
     letter-spacing: -0.02em;
     line-height: 1.15;
   }
 
   .section-desc {
-    font-size: 1rem;
+    font-size: 0.98rem;
     line-height: 1.55;
   }
 
   .section-label {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     padding: 0.25rem 0.6rem;
     margin-bottom: 0.85rem;
   }
 
   .btn-brutal {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.88rem;
-    box-shadow: 4px 4px 0 #000000;
+    padding: 0.7rem 1.15rem;
+    font-size: 0.85rem;
+    box-shadow: 3px 3px 0 #000000;
   }
 
   .btn-brutal:hover {
     transform: none;
-    box-shadow: 4px 4px 0 #000000;
+    box-shadow: 3px 3px 0 #000000;
   }
 
   .brutal-card {
@@ -326,19 +355,28 @@ code, pre {
   }
 
   .brutal-card-lg {
-    box-shadow: 5px 5px 0 #000000;
+    box-shadow: 4px 4px 0 #000000;
   }
 
   .brutal-card-lg:hover {
     transform: none;
-    box-shadow: 5px 5px 0 #000000;
+    box-shadow: 4px 4px 0 #000000;
+  }
+
+  .developer-workspace {
+    box-shadow: 4px 4px 0 #000000 !important;
+  }
+
+  .tech-chip {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding-left: 0.85rem;
-    padding-right: 0.85rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
   }
 
   .section-wrapper {
@@ -346,8 +384,10 @@ code, pre {
   }
 
   .btn-brutal {
-    padding: 0.7rem 1rem;
+    padding: 0.65rem 0.95rem;
     font-size: 0.82rem;
+    white-space: normal;
+    text-align: center;
   }
 }
 

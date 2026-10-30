@@ -305,6 +305,15 @@ export default function Education() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .background-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.25rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
