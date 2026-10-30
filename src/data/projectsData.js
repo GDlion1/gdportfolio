@@ -141,14 +141,37 @@ async def query_document(payload: QueryRequest):
     id: "vera-ai-agent",
     title: "V.E.R.A. — Voice-Enabled EV Intelligence & Personal AI Agent",
     category: "VOICE AI AGENT",
-    subtitle: "Voice-First Automotive AI Assistant & Telemetry Loop",
+    subtitle: "Voice-First Automotive AI Assistant & Telemetry Loop (Ongoing Project)",
     description:
-      "A voice-first AI assistant concept combining LLM reasoning, real-time vehicle telemetry, contextual memory, and event-driven automation for personalized driver assistance.",
+      "An ongoing voice-first AI assistant and telemetry intelligence project combining LLM reasoning, real-time vehicle telemetry, contextual memory, and event-driven automation for personalized driver assistance.",
     featured: true,
-    badge: "AI AGENT CONCEPT",
-    liveUrl: null, // Concept / Architecture prototype
+    isOngoing: true,
+    badge: "ONGOING PROJECT · ACTIVE DEVELOPMENT",
+    liveUrl: null, // Ongoing Development / Architecture prototype
     githubUrl: "https://github.com/GDlion1",
-    repoStatus: "Architecture Prototype & Concepts",
+    repoStatus: "Active Ongoing Project · Development In Progress",
+    currentSprint:
+      "Phase 2: Integrating real-time bi-directional audio streaming via WebRTC with Gemini Live API, alongside an MQTT message broker for simulated vehicle CAN bus telemetry.",
+    ongoingMilestones: [
+      {
+        phase: "Phase 01",
+        title: "Architecture & Telemetry Specs",
+        status: "COMPLETED",
+        desc: "Designed state machine, safety boundaries separating deterministic commands from LLM outputs, and MQTT telemetry schema for battery SoC and cabin climate."
+      },
+      {
+        phase: "Phase 02",
+        title: "WebRTC Audio & Gemini Agent",
+        status: "IN PROGRESS",
+        desc: "Currently implementing low-latency bi-directional voice streaming via WebRTC, conversational turn-taking, and prompt-grounded tool execution."
+      },
+      {
+        phase: "Phase 03",
+        title: "Memory Graph & Vehicle Hardware Sim",
+        status: "UPCOMING",
+        desc: "Building persistent driver preferences in PostgreSQL with JSONB schema, proactive route triggers, and simulated CAN bus test harness."
+      }
+    ],
     theme: {
       accentColor: "#FFE17C",
       badgeBg: "#FFE17C",
@@ -158,8 +181,8 @@ async def query_document(payload: QueryRequest):
     technologies: [
       "Python",
       "FastAPI",
-      "Gemini",
-      "MQTT",
+      "Gemini API",
+      "MQTT Broker",
       "PostgreSQL",
       "WebRTC",
       "GPS Telemetry",
@@ -174,6 +197,7 @@ async def query_document(payload: QueryRequest):
       { step: "Event-Driven MQTT", desc: "Publishes machine commands to vehicle bus (pre-cooling cabin, charging alerts, proactive reminders)." }
     ],
     keyFeatures: [
+      "Ongoing development: Phase 2 active sprint combining real-time speech-to-speech WebRTC with Gemini.",
       "Voice-first natural interaction loop minimizing driver cockpit distraction.",
       "Real-time vehicle telemetry ingestion (State of Charge, temperature, geofence, tire pressure).",
       "Persistent contextual memory capable of remembering passengers, routine routes, and future tasks.",
@@ -185,14 +209,14 @@ async def query_document(payload: QueryRequest):
       problem:
         "Current in-car infotainment voice assistants are rigid, rule-bound, and unaware of holistic driver context, while generic LLMs cannot safely interact with deterministic automotive constraints or real-time telemetry.",
       solution:
-        "Engineered an architecture separating conversational reasoning (Gemini LLM via WebRTC) from deterministic vehicle control (FastAPI & MQTT services). A memory engine correlates calendar events with battery state to deliver proactive driver advice.",
+        "Architecting an ongoing voice-first intelligence system that decouples conversational reasoning (Gemini LLM via WebRTC) from deterministic vehicle actuation (FastAPI & MQTT services). A memory engine correlates calendar events with battery state to deliver proactive driver advice.",
       engineeringDecisions: [
         "Isolated vehicle event triggers (MQTT) from generative language generation to ensure vehicle safety commands are strictly deterministic.",
         "Employed WebRTC for ultra-low latency voice packet transport compared to HTTP polling.",
         "Modeled persistent passenger profiles and geo-triggers in PostgreSQL using relational schema with JSONB metadata."
       ],
       limitations:
-        "System is an architectural concept and simulated software prototype; validated using simulated telemetry payloads rather than a physical production EV CAN bus."
+        "Active ongoing engineering project in Phase 2 development. Validated against simulated vehicle telemetry feeds using an MQTT broker prior to physical hardware head-unit integration."
     }
   },
   {

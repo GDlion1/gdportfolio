@@ -204,6 +204,89 @@ export default function CaseStudyModal({ project, onClose }) {
             </div>
           </div>
 
+          {/* Ongoing Project Roadmap Block if applicable */}
+          {project.isOngoing && project.ongoingMilestones && (
+            <div
+              style={{
+                backgroundColor: "#FEFCE8",
+                border: "2px solid #CA8A04",
+                borderRadius: "var(--radius-md)",
+                padding: "1.25rem",
+                boxShadow: "3px 3px 0 #000000"
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "#CA8A04"
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.78rem",
+                    fontWeight: 800,
+                    color: "#854D0E"
+                  }}
+                >
+                  ACTIVE DEVELOPMENT ROADMAP // ONGOING SPRINT
+                </span>
+              </div>
+              <p style={{ fontSize: "0.92rem", color: "#713F12", lineHeight: 1.55, marginBottom: "1rem" }}>
+                {project.currentSprint}
+              </p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                {project.ongoingMilestones.map((m, idx) => {
+                  const isDone = m.status === "COMPLETED";
+                  const isInProg = m.status === "IN PROGRESS";
+                  return (
+                    <div
+                      key={idx}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "0.75rem",
+                        backgroundColor: "#FFFFFF",
+                        border: isInProg ? "2px solid #CA8A04" : "1.5px solid #E5E7EB",
+                        borderRadius: "4px",
+                        padding: "0.75rem 1rem",
+                        boxShadow: isInProg ? "2px 2px 0 #CA8A04" : "none"
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontWeight: 800,
+                          fontSize: "0.72rem",
+                          padding: "0.2rem 0.55rem",
+                          borderRadius: "2px",
+                          backgroundColor: isDone ? "#16A34A" : isInProg ? "#EAB308" : "#E2E8F0",
+                          color: isInProg ? "#000000" : isDone ? "#FFFFFF" : "#475569",
+                          whiteSpace: "nowrap"
+                        }}
+                      >
+                        {m.status}
+                      </span>
+                      <div>
+                        <strong style={{ fontFamily: "var(--font-display)", fontSize: "0.95rem", color: "#1F2937", display: "block" }}>
+                          {m.phase}: {m.title}
+                        </strong>
+                        <p style={{ fontSize: "0.85rem", color: "#4B5563", marginTop: "0.2rem", lineHeight: 1.45, margin: 0 }}>
+                          {m.desc}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Architecture Pipeline Flow */}
           {project.architecture && (
             <div

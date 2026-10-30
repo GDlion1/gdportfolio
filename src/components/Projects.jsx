@@ -581,14 +581,19 @@ export default function Projects() {
                     <span
                       style={{
                         fontFamily: "var(--font-mono)",
-                        fontSize: "0.7rem",
-                        fontWeight: 700,
-                        backgroundColor: "rgba(255,255,255,0.1)",
-                        color: "var(--color-sage)",
-                        padding: "0.2rem 0.5rem",
-                        borderRadius: "2px"
+                        fontSize: "0.72rem",
+                        fontWeight: 800,
+                        backgroundColor: "rgba(255, 225, 124, 0.15)",
+                        color: "var(--color-yellow)",
+                        border: "1.5px solid var(--color-yellow)",
+                        padding: "0.25rem 0.6rem",
+                        borderRadius: "2px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.4rem"
                       }}
                     >
+                      <span className="ongoing-pulse-dot" />
                       {veraProject.badge}
                     </span>
                   </div>
@@ -630,9 +635,92 @@ export default function Projects() {
                 </div>
               </div>
 
-              <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "#D1D5DB", maxWidth: "800px", marginBottom: "2rem" }}>
+              <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "#D1D5DB", maxWidth: "800px", marginBottom: "1.5rem" }}>
                 {veraProject.description}
               </p>
+
+              {/* VERA Active Development & Milestone Tracker */}
+              {veraProject.isOngoing && (
+                <div
+                  style={{
+                    backgroundColor: "rgba(255, 225, 124, 0.06)",
+                    border: "1.5px solid rgba(255, 225, 124, 0.35)",
+                    borderRadius: "var(--radius-sm)",
+                    padding: "1.25rem",
+                    marginBottom: "2rem"
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.4rem" }}>
+                    <span className="ongoing-pulse-dot" />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "0.75rem",
+                        fontWeight: 800,
+                        color: "var(--color-yellow)",
+                        letterSpacing: "0.05em"
+                      }}
+                    >
+                      CURRENT DEVELOPMENT SPRINT // ACTIVE BUILD
+                    </span>
+                  </div>
+                  <p style={{ fontSize: "0.92rem", color: "#F3F4F6", lineHeight: 1.55, marginBottom: "1.1rem" }}>
+                    {veraProject.currentSprint}
+                  </p>
+
+                  {/* 3-Step Milestone Track */}
+                  {veraProject.ongoingMilestones && (
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 210px), 1fr))",
+                        gap: "0.75rem"
+                      }}
+                    >
+                      {veraProject.ongoingMilestones.map((m, mIdx) => {
+                        const isDone = m.status === "COMPLETED";
+                        const isInProg = m.status === "IN PROGRESS";
+                        return (
+                          <div
+                            key={mIdx}
+                            style={{
+                              backgroundColor: isInProg ? "rgba(255, 225, 124, 0.12)" : "rgba(255, 255, 255, 0.03)",
+                              border: isInProg ? "1.5px solid var(--color-yellow)" : "1px solid rgba(255, 255, 255, 0.12)",
+                              borderRadius: "4px",
+                              padding: "0.85rem"
+                            }}
+                          >
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.3rem" }}>
+                              <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", fontWeight: 700, color: isInProg ? "var(--color-yellow)" : "var(--color-sage)" }}>
+                                {m.phase}
+                              </span>
+                              <span
+                                style={{
+                                  fontFamily: "var(--font-mono)",
+                                  fontSize: "0.65rem",
+                                  fontWeight: 800,
+                                  padding: "0.15rem 0.4rem",
+                                  borderRadius: "2px",
+                                  backgroundColor: isDone ? "#16A34A" : isInProg ? "var(--color-yellow)" : "rgba(255,255,255,0.12)",
+                                  color: isInProg ? "#000000" : "#FFFFFF"
+                                }}
+                              >
+                                {m.status}
+                              </span>
+                            </div>
+                            <strong style={{ display: "block", fontSize: "0.88rem", color: "#FFFFFF", marginBottom: "0.25rem" }}>
+                              {m.title}
+                            </strong>
+                            <p style={{ fontSize: "0.78rem", color: "var(--color-sage)", lineHeight: 1.45, margin: 0 }}>
+                              {m.desc}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* VERA Capabilities Bento */}
               <div
@@ -850,6 +938,20 @@ export default function Projects() {
           .rag-problem-expl {
             grid-template-columns: 1fr 1fr !important;
           }
+        }
+
+        @keyframes ongoingPulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.35; transform: scale(0.85); }
+        }
+        .ongoing-pulse-dot {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: var(--color-yellow);
+          box-shadow: 0 0 6px var(--color-yellow);
+          animation: ongoingPulse 1.6s infinite ease-in-out;
         }
 
         @media (max-width: 959px) {
